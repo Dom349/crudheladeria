@@ -1,0 +1,10 @@
+namespace capapoducto
+{
+    public class CPventa
+    {
+        public string producto { get; set; }
+        public int vantidad { get; set; }
+        public float precio { get; set; }
+        public string imagen { get; set; }
+    }
+}
