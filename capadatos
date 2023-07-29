@@ -1,0 +1,88 @@
+using System;
+using MySql.DAta.MySqlventa;
+using capapoducto
+using MySql.Data.MySqlClient;
+using System.Windows.Forms;
+using System.Data;
+using capadatos;
+
+namespace capadatos
+{
+    public class CDventa
+    {
+        string CadenaConexion = "server=localhost;user=root;password=;port=3306;database=Heladeria";
+
+        public void pruebaconexion();
+        {
+
+           MySqlConnection mySqlConnection = new MySqlConnection(cadenaconexion)
+
+            try 
+	{	        
+
+        mysqlConnection.open();
+
+	}
+	catch (exeption ex)
+	{
+        MessageBox.show("Error al conectar" + ex.Message);
+        return;
+
+	}
+mySqlConnection.Close();
+MessageBox.Show("Conectado");
+
+           
+    }
+
+public void crear(CPventa cPventa);
+{
+    MySqlConnection mySqlConnection = new MySqlConnection(cadenaconexion)}
+    mysqlConnection.open();
+string Query = "INSERT into(´producto´,´imagen´) VALUES (´"+cP.producto + "´,´" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(cP.imagen)
+MySqlConnection mySqlConnection = new MySqlConnection(Query, mySqlConnection);
+mySqlConnection.ExecuteQuery();
+mySqlConnection.Close();
+
+MessageBox.Show("registro creado");
+
+}
+
+public void editar(CPventa cPventa);
+{
+    MySqlConnection mySqlConnection = new MySqlConnection(cadenaconexion)}
+mysqlConnection.open();
+string Query = "UPDATE ´Heladeria´ SET ´producto´=´" + cP.producto + "´,´imagen´=´" + MySql.Data.MySqlClient.MySqlHelper.EscapeString(cP.imagen) + "´ WHERE ´cantidad´=" + CPventa.cantidad + "´,´precio´=´" + CPventa.cantidad +´";";
+mySqlConnection.ExecuteQuery();
+mySqlConnection.Close();
+
+MessageBox.Show("registro actualzado");
+
+}
+
+public void eliminar(Pventa cPventa);)
+{
+    MySqlConnection mySqlConnection = new MySqlConnection(cadenaconexion)}
+mysqlConnection.open();
+string Query = "DELETE FROM ´Heladeria´ WHERE ´cantidad´=´´cantidad´=´" + CPventa.cantidad + ´"´,´precio´=´"´ + CPventa.precio +´"´;´";
+mySqlConnection.ExecuteQuery();
+mySqlConnection.Close();
+
+MessageBox.Show("registro eliminado");
+
+}
+public DataSet Lista()
+{
+    MySqlConnection mySqlConnection = new MySqlConnection(cadenaconexion)}
+mysqlConnection.open();
+string Query = " SELECT * FROM ´producto´ LIMIT 1000;";
+    MySqlDataAdapter Adaptador;
+Dataset dataset = new Dataset();
+
+Adaptador = new MySqlDataAdapter(Query, MySqlConnection);
+Adaptador.Fill(dataset, "tbl");
+return dataset;
+
+}
+
+}
