@@ -1,0 +1,57 @@
+using capapoducto
+using System;
+using System.Windows.Forms;
+using capadatos
+using System.Data;
+using capaventa;
+
+namespace capaventa
+{
+
+    CPventa cPventa1 = new CPventa();
+    
+    public class CVventa
+    {
+        public Boolean ValidarDatos(CPventa cPventa)
+        {
+            bool Resultado = true;
+
+            if (cPventa.producto == string.Empty) 
+            {
+                Resultado = false;
+                MessageBox.Show("El producto es oblgatorio);
+            }
+            if (cPventa.foto == null)
+            {
+                Resultado = false
+                MessageBox.Show("La imagen es obligatoria");
+            }
+            return Resultado;
+
+        }
+
+        public void PruebaMySql()
+        {
+            CDventa.pruebaconexion();
+        }
+
+
+        public void crearproducto(CPventa cPventa);
+        {
+            CDventa.crear(cPventa);
+        }
+    public void editarproducto(CPventa cPventa);
+        {
+            CDventa.editar(cPventa);
+}
+
+public void elimnarproducto(CPventa cPventa);
+{
+    CDventa.eliminar(cPventa);
+}
+
+public DataSet obtenerdatos();
+    {
+    return CDventa.Listar();
+    }
+}
