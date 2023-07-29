@@ -1,0 +1,132 @@
+using System.Data;
+using capapoducto;
+using System;
+using capaventa;
+
+namespace capapresentacion
+{
+    public partial class frventa : Form
+    {
+        CPventa cPventa1 = new CPventa();
+        public frventa()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            griDatos.DataSource = CPventa.obtenerdatos().Tables["tbl"];
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtproducyo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnnuevo_Click(object sender, EventArgs e)
+        {
+            LimpiarForm();
+        }
+        private void LimpiarForm()
+        {
+            txtproducyo.Text = string.Empty;
+            txtcantidad.vaule = 0;
+            txtprecio.vaule = 0;
+            picimagen.image = null;
+        }
+
+        private void lnkfoto_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            ofdfotoeName = string.Empty;
+            if (ofdfoto.showDialog() == DialogResult.OK) ;
+            {
+                picimagen.Load(ofdimagen.FileName);
+
+            }
+            ofdfotoeName = string.Empty;
+        }
+
+        private void txtcantidad_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtprecio_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picimagen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnguardar_Click(object sender, EventArgs e)
+        {
+            bool Resultado;
+            CPventa cPventa = new CPventa();
+            CPventa.producyo = txtproducyo.Text;
+            CPventa.cantidad = txtcantidad.Value;
+            CPventa.precio = txtprecio.Value;
+            CPventa.imagen = picimagen.imageLocation;
+
+            Resultado = CPventa.ValidarDatos(CPventa CPventa);
+            if (Resultado == false)
+            {
+                return;
+            }
+            if (CPventa.cantidad == 0)
+            {
+                cPventa.Crearventa(cPventa);
+            }
+            else
+            {
+                CPventa.editarventa(CPventa);
+            }
+
+           
+            CargarDatos();
+            LimpiarForm();
+        }
+
+        private void ofdfoto_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+           if(txtcantidad.Value == 0 )
+            {
+                return;
+            }
+
+           if(MessageBox.Show("¿Deseas eliminar el registro?","titulo",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                CPventa cPventa = new CPventa();
+                cPventa.cantidad =(int)txtcantidad.Value;
+                cPventa.precio = (float)txtpecio.Value;
+                CPventa.eliminarventa(cPventa);
+                CargarDatos();
+                LimpiarForm();
+
+            }
+        }
+
+        private void griDatos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtproducyo.Text = griDato.CurrentRow.Cells["producyo"].value.ToString();
+            txtcantidad.value = (int)griDato.CurrentRow.Cells["cantidad"].value;
+            txtprecio.Value = (float)griDato.CurrentRow.Cells["precio"].value;
+            picimagen.Load(griDato.CurrentRow.Cells["imagen"].value.ToString());
+
+
+        }
+    }
+}
